@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.logisticsmanagement.activity.LoginActivity
 import com.example.logisticsmanagement.activity.ManageActivity
+import com.example.logisticsmanagement.activity.ROUTE_LOGIN
+import com.example.logisticsmanagement.activity.ROUTE_MAIN
 import com.example.logisticsmanagement.ui.theme.ApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,8 +29,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainContent() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginActivity(navController = navController) }
-        composable("main") { ManageActivity(navController = navController) }
+    NavHost(navController = navController, startDestination = ROUTE_LOGIN) {
+        composable(ROUTE_LOGIN) { LoginActivity(navController = navController) }
+        composable(ROUTE_MAIN) { ManageActivity(navController = navController) }
     }
 }

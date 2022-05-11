@@ -6,13 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 const val DATABASE_NAME = "management.db"
+const val DATABASE_VERSION = 1
 
-@Database(entities = [Employee::class], version = 1, exportSchema = false)
+@Database(entities = [Employee::class], version = DATABASE_VERSION, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun employeeDAO(): EmployeeDAO
 
     companion object {
-        @Volatile
         private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {

@@ -18,6 +18,8 @@ import androidx.navigation.NavController
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.ui.theme.LightBlue
 
+const val ROUTE_LOGIN = "login"
+
 @Composable
 fun LoginActivity(navController: NavController) {
     val context = LocalContext.current
