@@ -15,8 +15,11 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var instance: AppDatabase? = null
 
+        @JvmStatic
         fun getInstance(context: Context): AppDatabase {
-            return instance ?: buildDatabase(context).also { instance = it }
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
+            }
         }
 
         private fun buildDatabase(context: Context): AppDatabase {
