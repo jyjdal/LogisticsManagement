@@ -29,6 +29,11 @@ fun MainContent() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = ROUTE_LOGIN) {
         composable(ROUTE_LOGIN) { LoginActivity(navController = navController) }
-        composable(ROUTE_MAIN) { ManageActivity(navController = navController) }
+        composable("${ROUTE_MAIN}/{jobNumber}/{password}") {
+            ManageActivity(
+                navController = navController,
+                it.arguments?.getString("jobNumber")!!, it.arguments?.getString("password")!!
+            )
+        }
     }
 }

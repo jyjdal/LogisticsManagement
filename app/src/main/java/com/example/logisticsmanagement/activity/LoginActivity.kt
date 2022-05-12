@@ -130,9 +130,9 @@ fun LoginActivity(navController: NavController) {
                 }
 
                 // 正确登录，首先清空输入，然后导航到
+                navController.navigate("${ROUTE_MAIN}/${jobNumber.value}/${password.value}")
                 jobNumber.value = ""
                 password.value = ""
-                navController.navigate(ROUTE_MAIN)
             }, modifier = Modifier.focusable()) { Text(text = "登陆", fontSize = 24.sp) }
             Spacer(modifier = Modifier.width(64.dp))
             Button(onClick = { exitProcess(0) }) { Text(text = "退出", fontSize = 24.sp) }
