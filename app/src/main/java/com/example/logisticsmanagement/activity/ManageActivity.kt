@@ -5,8 +5,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 
-const val ROUTE_MAIN = "main"
-
 @Composable
 fun ManageActivity(navController: NavController) {
     Text(text = "This is main activity content!")

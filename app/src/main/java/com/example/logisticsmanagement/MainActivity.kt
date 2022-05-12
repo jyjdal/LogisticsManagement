@@ -10,8 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.logisticsmanagement.activity.LoginActivity
 import com.example.logisticsmanagement.activity.ManageActivity
-import com.example.logisticsmanagement.activity.ROUTE_LOGIN
-import com.example.logisticsmanagement.activity.ROUTE_MAIN
 import com.example.logisticsmanagement.ui.theme.ApplicationTheme
 
 class MainActivity : ComponentActivity() {
