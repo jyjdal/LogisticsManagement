@@ -113,6 +113,9 @@ fun LoginActivity(navController: NavController) {
 
                 // 如果账号不存在
                 if (employee == null) {
+                    jobNumber.value = ""
+                    password.value = ""
+
                     showErrorDialog.value = true
                     loginErrorMessage.value = "账号不存在！"
                     return@Button
@@ -146,13 +149,14 @@ fun LoginErrorAlertDialog(showDialog: MutableState<Boolean>, message: MutableSta
     if (showDialog.value) {
         AlertDialog(
             onDismissRequest = { showDialog.value = false },
-            title = { Text(text = "登录错误！") },
-            text = { Text(text = message.value) },
+            title = { Text(text = "登录错误！", fontSize = 20.sp) },
+            text = { Text(text = message.value, fontSize = 24.sp) },
             confirmButton = {
                 TextButton(onClick = { showDialog.value = false }) {
-                    Text(text = "确认")
+                    Text(text = "确认", fontSize = 20.sp)
                 }
-            }
+            },
+            modifier = Modifier.width(320.dp)
         )
     }
 }
