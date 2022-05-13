@@ -10,6 +10,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,7 +58,22 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
             Button(onClick = { exitProcess(0) }) { Text(text = "退出") }
         }
     }
-    AboutDialog(showDialog)
+    CustomContentDialog(showDialog = showDialog, title = "物流管理系统 v1.0") {
+        Column {
+            Text(
+                text = """
+            物流管理系统 v1.0 By 孙强
+            学号：20194780
+            班级：计算机1906
+        """.trimIndent(), fontSize = PRIMARY_TEXT_SIZE
+            )
+            TextButton(onClick = {
+
+            }) {
+                Text(text = "Github仓库", fontSize = PRIMARY_TEXT_SIZE)
+            }
+        }
+    }
 }
 
 @Composable
@@ -94,22 +110,6 @@ fun FieldDisplayRow(label: String, field: String) {
             value = field, onValueChange = {},
             readOnly = true, modifier = Modifier.fillMaxWidth(FIELD_WIDTH),
             textStyle = TextStyle(fontSize = FIELD_FONT_SIZE),
-        )
-    }
-}
-
-@Composable
-fun AboutDialog(showDialog: MutableState<Boolean>) {
-    if (showDialog.value) {
-        AlertDialog(
-            onDismissRequest = { showDialog.value = false },
-            title = { Text(text = "登录错误！") },
-            text = { Text(text = "") },
-            confirmButton = {
-                TextButton(onClick = { showDialog.value = false }) {
-                    Text(text = "确认")
-                }
-            }
         )
     }
 }

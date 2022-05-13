@@ -1,6 +1,5 @@
 package com.example.logisticsmanagement.activity
 
-import android.widget.Toast
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -12,7 +11,6 @@ import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.twotone.Assessment
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -38,9 +36,9 @@ fun LoginActivity(navController: NavController) {
     // 用于保存登录的账号密码
     val jobNumber = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
-    // 用于显示对话框
-    val showErrorDialog = remember { mutableStateOf(false) }
-    val loginErrorMessage = remember { mutableStateOf("") }
+    // 用于处理登录错误（账号不存在、密码错误等）
+    val loginError = remember { mutableStateOf(false) }
+    val errorMessage = remember { mutableStateOf("") }
     // 用于获取控件焦点
     val focusManager = LocalFocusManager.current
 
@@ -52,14 +50,15 @@ fun LoginActivity(navController: NavController) {
     ) {
         Icon(
             Icons.TwoTone.Assessment, contentDescription = null,
-            modifier = Modifier.size(140.dp), tint = LightBlue
+            modifier = Modifier
+                .size(160.dp)
+                .padding(0.dp, 8.dp), tint = LightBlue
         )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = "物流管理系统 By 孙强", fontSize = 20.sp)
-        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "物流管理系统 By 孙强", fontSize = 24.sp, modifier = Modifier.padding(8.dp))
         OutlinedTextField(
             value = jobNumber.value, onValueChange = { jobNumber.value = it },
             label = { Text(text = "工号：", fontSize = 20.sp) },
+            modifier = Modifier.padding(0.dp, 12.dp),
             leadingIcon = { Icon(Icons.Filled.Person, contentDescription = null) },
             trailingIcon = {
                 if (jobNumber.value.isNotEmpty()) {
@@ -77,10 +76,10 @@ fun LoginActivity(navController: NavController) {
             ),
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) })
         )
-        Spacer(modifier = Modifier.size(24.dp))
         OutlinedTextField(
             value = password.value, onValueChange = { password.value = it },
             label = { Text(text = "密码：", fontSize = 20.sp) },
+            modifier = Modifier.padding(0.dp, 12.dp),
             visualTransformation = PasswordVisualTransformation(),
             leadingIcon = { Icon(Icons.Filled.Password, contentDescription = null) },
             trailingIcon = {
@@ -103,7 +102,7 @@ fun LoginActivity(navController: NavController) {
         Row {
             Button(onClick = {
                 if (jobNumber.value.isBlank() or password.value.isBlank()) {
-                    Toast.makeText(context, "用户名或密码不能为空！", Toast.LENGTH_SHORT).show()
+                    "用户名或密码不能为空！".showToast(context)
                     return@Button
                 }
 
@@ -116,8 +115,8 @@ fun LoginActivity(navController: NavController) {
                     jobNumber.value = ""
                     password.value = ""
 
-                    showErrorDialog.value = true
-                    loginErrorMessage.value = "账号不存在！"
+                    loginError.value = true
+                    errorMessage.value = "账号不存在！"
                     return@Button
                 }
 
@@ -127,8 +126,8 @@ fun LoginActivity(navController: NavController) {
                     jobNumber.value = ""
                     password.value = ""
                     // 显示错误提示对话框
-                    showErrorDialog.value = true
-                    loginErrorMessage.value = "密码错误！"
+                    loginError.value = true
+                    errorMessage.value = "密码错误！"
                     return@Button
                 }
 
@@ -140,23 +139,6 @@ fun LoginActivity(navController: NavController) {
             Spacer(modifier = Modifier.width(64.dp))
             Button(onClick = { exitProcess(0) }) { Text(text = "退出", fontSize = 24.sp) }
         }
-        LoginErrorAlertDialog(showDialog = showErrorDialog, loginErrorMessage)
-    }
-}
-
-@Composable
-fun LoginErrorAlertDialog(showDialog: MutableState<Boolean>, message: MutableState<String>) {
-    if (showDialog.value) {
-        AlertDialog(
-            onDismissRequest = { showDialog.value = false },
-            title = { Text(text = "登录错误！", fontSize = 20.sp) },
-            text = { Text(text = message.value, fontSize = 24.sp) },
-            confirmButton = {
-                TextButton(onClick = { showDialog.value = false }) {
-                    Text(text = "确认", fontSize = 20.sp)
-                }
-            },
-            modifier = Modifier.width(320.dp)
-        )
+        TextDialog(showDialog = loginError, title = "登录错误！", message = errorMessage.value)
     }
 }
