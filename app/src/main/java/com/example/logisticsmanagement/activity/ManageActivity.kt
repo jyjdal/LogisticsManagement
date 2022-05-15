@@ -7,10 +7,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
+import com.example.logisticsmanagement.ROUTE_ONLINE_WAYBILL
+import com.example.logisticsmanagement.WAYBILL_TYPE_JSON
+import com.example.logisticsmanagement.WAYBILL_TYPE_XML
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,6 +55,18 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
         }
         ContentDivider()
 
+        Column(modifier = Modifier.fillMaxWidth(1F)) {
+            Button(onClick = { /*TODO*/ }) {
+                Text(text = "查看本地运单")
+            }
+            Button(onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_JSON}") }) {
+                Text(text = "查看在线运单-Json")
+            }
+            Button(onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_XML}") }) {
+                Text(text = "查看在线运单-Xml")
+            }
+        }
+
         Row {
             Button(onClick = { navController.popBackStack() }) { Text(text = "退出登录") }
             Spacer(modifier = Modifier.width(80.dp))
@@ -62,16 +77,15 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
         Column {
             Text(
                 text = """
-            物流管理系统 v1.0 By 孙强
+            作者：孙强
             学号：20194780
             班级：计算机1906
         """.trimIndent(), fontSize = PRIMARY_TEXT_SIZE
             )
-            TextButton(onClick = {
-
-            }) {
-                Text(text = "Github仓库", fontSize = PRIMARY_TEXT_SIZE)
-            }
+            Text(
+                text = "github.com/jyjdal/LogisticsManagement", fontSize = SECONDARY_TEXT_SIZE,
+                textDecoration = TextDecoration.Underline
+            )
         }
     }
 }
@@ -89,12 +103,12 @@ fun ContentDivider() {
 val ROW_VERTICAL_PADDING = 20.dp
 
 // 每行标签和内容的宽度占比，实际超过1
-const val LABEL_WIDTH = 0.3F
-const val FIELD_WIDTH = 0.9F
+const val LABEL_WIDTH = 0.35F
+const val FIELD_WIDTH = 1.1F
 
 // 字体大小
-val LABEL_FONT_SIZE = 28.sp
-val FIELD_FONT_SIZE = 24.sp
+val LABEL_FONT_SIZE = 24.sp
+val FIELD_FONT_SIZE = 20.sp
 
 @Composable
 fun FieldDisplayRow(label: String, field: String) {

@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.logisticsmanagement.activity.LoginActivity
 import com.example.logisticsmanagement.activity.ManageActivity
+import com.example.logisticsmanagement.activity.OnlineWayBill
 import com.example.logisticsmanagement.ui.theme.ApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +33,14 @@ fun MainContent() {
         composable("${ROUTE_MAIN}/{jobNumber}/{password}") {
             ManageActivity(
                 navController = navController,
-                it.arguments?.getString("jobNumber")!!, it.arguments?.getString("password")!!
+                jobNumber = it.arguments?.getString("jobNumber")!!,
+                password = it.arguments?.getString("password")!!
+            )
+        }
+        composable("${ROUTE_ONLINE_WAYBILL}/{factory}") {
+            OnlineWayBill(
+                navController = navController,
+                factoryType = it.arguments?.getString("factory")!!
             )
         }
     }
