@@ -5,6 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
+/**
+ * 运单实体类，分为三部分：
+ *   第一部分是必选项
+ *   第二部分是可选项
+ *   第三部分在本地运单中没有属性，只在在线运单中可见
+ */
 @Entity
 @Root(name = "waybillRecord")
 data class Waybill(

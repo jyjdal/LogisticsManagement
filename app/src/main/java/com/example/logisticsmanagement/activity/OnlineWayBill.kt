@@ -17,7 +17,7 @@ import androidx.navigation.NavController
 import com.example.logisticsmanagement.WAYBILL_URL_BASE
 import com.example.logisticsmanagement.WAYBILL_TYPE_XML
 import com.example.logisticsmanagement.data.Waybill
-import com.example.logisticsmanagement.data.WaybillRecordOrTable
+import com.example.logisticsmanagement.data.WaybillPackaged
 import com.example.logisticsmanagement.data.WaybillService
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,15 +44,15 @@ fun OnlineWayBill(navController: NavController, factoryType: String) {
                 service.getWaybillsXml()
             else
                 service.getWaybillsJson()
-        call.enqueue(object : Callback<WaybillRecordOrTable> {
-            override fun onResponse(call: Call<WaybillRecordOrTable>, response: Response<WaybillRecordOrTable>) {
+        call.enqueue(object : Callback<WaybillPackaged> {
+            override fun onResponse(call: Call<WaybillPackaged>, response: Response<WaybillPackaged>) {
                 val list = response.body()!!.waybillList
                 Log.i("Web waybill", "${list.size}")
                 waybillList.addAll(list)
                 "${waybillList.size}".log()
             }
 
-            override fun onFailure(call: Call<WaybillRecordOrTable>, t: Throwable) {
+            override fun onFailure(call: Call<WaybillPackaged>, t: Throwable) {
                 t.printStackTrace()
             }
 

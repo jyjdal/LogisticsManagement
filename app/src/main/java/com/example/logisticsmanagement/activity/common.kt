@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+// 用于快速显示Toast和打印日志的扩展方法
 fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, this, duration).show()
 }
@@ -21,6 +22,7 @@ fun String.log(level: Int = Log.INFO, tag: String = "Application log") {
     Log.println(level, tag, this)
 }
 
+// 对一些常用的对话框进行封装
 val PRIMARY_TEXT_SIZE = 24.sp
 val SECONDARY_TEXT_SIZE = 20.sp
 

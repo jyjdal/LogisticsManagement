@@ -7,8 +7,8 @@ import retrofit2.http.GET
 
 interface WaybillService {
     @GET(WAYBILL_URL_JSON)
-    fun getWaybillsJson(): Call<WaybillRecordOrTable>
+    fun getWaybillsJson(): Call<WaybillPackaged>
 
     @GET(WAYBILL_URL_XML)
-    fun getWaybillsXml(): Call<WaybillRecordOrTable>
+    fun getWaybillsXml(): Call<WaybillPackaged>
 }
