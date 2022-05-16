@@ -55,21 +55,36 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
         }
         ContentDivider()
 
-        Column(modifier = Modifier.fillMaxWidth(1F)) {
-            Button(onClick = { /*TODO*/ }) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(1F)
+                .fillMaxHeight(0.6F),
+            verticalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { /*TODO*/ }) {
                 Text(text = "查看本地运单")
             }
-            Button(onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_JSON}") }) {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_JSON}") }) {
                 Text(text = "查看在线运单-Json")
             }
-            Button(onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_XML}") }) {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { navController.navigate("${ROUTE_ONLINE_WAYBILL}/${WAYBILL_TYPE_XML}") }) {
                 Text(text = "查看在线运单-Xml")
             }
         }
 
-        Row {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp, 20.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
             Button(onClick = { navController.popBackStack() }) { Text(text = "退出登录") }
-            Spacer(modifier = Modifier.width(80.dp))
             Button(onClick = { exitProcess(0) }) { Text(text = "退出") }
         }
     }
