@@ -1,6 +1,7 @@
 package com.example.logisticsmanagement.activity
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.AlertDialog
@@ -14,6 +15,10 @@ import androidx.compose.ui.unit.sp
 
 fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, this, duration).show()
+}
+
+fun String.log(level: Int = Log.INFO, tag: String = "Application log") {
+    Log.println(level, tag, this)
 }
 
 val PRIMARY_TEXT_SIZE = 24.sp
