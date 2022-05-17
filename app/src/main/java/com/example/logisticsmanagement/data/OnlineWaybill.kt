@@ -24,24 +24,20 @@ data class OnlineWaybill(
     var src: String = "",  // 起点
     @JsonProperty("transportationArrivalStation") @field:Element(name = "transportationArrivalStation")
     var dest: String = "",  // 终点
-
-    // 本地录入运单的可选项
     @JsonProperty("consignor") @field:Element(name = "consignor")
-    var consignor: String? = "",
+    var consignor: String = "",
     @JsonProperty("consignorPhoneNumber") @field:Element(name = "consignorPhoneNumber")
-    var consignorPhoneNumber: String? = "",
+    var consignorPhoneNumber: String = "",
     @JsonProperty("consignee") @field:Element(name = "consignee")
-    var consignee: String? = "",
+    var consignee: String = "",
     @JsonProperty("consigneePhoneNumber") @field:Element(name = "consigneePhoneNumber")
-    var consigneePhoneNumber: String? = "",
+    var consigneePhoneNumber: String = "",
     @JsonProperty("freightPaidByTheReceivingParty") @field:Element(name = "freightPaidByTheReceivingParty")
-    var freightPaidByTheReceivingParty: Int? = 0,
+    var freightPaidByTheReceivingParty: Int = 0,
     @JsonProperty("freightPaidByConsignor") @field:Element(name = "freightPaidByConsignor")
-    var freightPaidByConsignor: Int? = 0,
-
-    // 本地运单中没有，只在在线运单中存在的属性
+    var freightPaidByConsignor: Int = 0,
     @JsonProperty("waybillNo") @field:Element(name = "waybillNo")
-    var waybillNo: String? = "",
+    var waybillNo: String = "",
     @JsonProperty("goodsDistributionAddress") @field:Element(name = "goodsDistributionAddress")
-    var goodsDistributionAddress: String? = ""
+    var goodsDistributionAddress: String = ""
 )
