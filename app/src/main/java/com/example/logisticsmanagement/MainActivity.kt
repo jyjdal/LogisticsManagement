@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.logisticsmanagement.activity.LoginActivity
 import com.example.logisticsmanagement.activity.ManageActivity
-import com.example.logisticsmanagement.activity.OnlineWayBill
+import com.example.logisticsmanagement.activity.OnlineWayBillActivity
 import com.example.logisticsmanagement.ui.theme.ApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,7 +38,7 @@ fun MainContent() {
             )
         }
         composable("${ROUTE_ONLINE_WAYBILL}/{factory}") {
-            OnlineWayBill(
+            OnlineWayBillActivity(
                 navController = navController,
                 factoryType = it.arguments?.getString("factory")!!
             )

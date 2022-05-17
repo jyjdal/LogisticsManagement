@@ -8,8 +8,8 @@ import org.simpleframework.xml.Root
 // { "waybillRecord": [ waybill, waybill, ... ] }
 // <waybillTable> <waybillRecord>...</waybillRecord> <waybillRecord>...</waybillRecord> </waybillTable>
 @Root(name = "waybillTable")
-data class WaybillPackaged(
+data class OnlineWaybillPackaged(
     @JsonProperty("waybillRecord")
     @field:ElementList(inline = true)
-    var waybillList: MutableList<Waybill> = mutableListOf()
+    var waybillList: MutableList<OnlineWaybill> = mutableListOf()
 )

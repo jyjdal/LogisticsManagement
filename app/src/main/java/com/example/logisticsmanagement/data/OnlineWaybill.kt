@@ -1,6 +1,7 @@
 package com.example.logisticsmanagement.data
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
@@ -13,7 +14,7 @@ import org.simpleframework.xml.Root
  */
 @Entity
 @Root(name = "waybillRecord")
-data class Waybill(
+data class OnlineWaybill(
     // 必选项
     @JsonProperty("goodsName") @field:Element(name = "goodsName")
     var name: String = "",  // 货物名称
