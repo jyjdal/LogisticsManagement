@@ -12,3 +12,6 @@ const val WAYBILL_TYPE_JSON = "json"
 const val WAYBILL_URL_BASE = "http://60.12.122.142:6080/"
 const val WAYBILL_URL_JSON = "simulated-Waybills-db.json"
 const val WAYBILL_URL_XML = "simulated-Waybills-db.xml"
+
+// GitHub在线仓库地址
+const val GITHUB_REPO = "https://github.com/jyjdal/LogisticsManagement"

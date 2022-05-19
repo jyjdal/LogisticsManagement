@@ -1,20 +1,20 @@
 package com.example.logisticsmanagement.activity
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.logisticsmanagement.ROUTE_OFFLINE_WAYBILL
-import com.example.logisticsmanagement.ROUTE_ONLINE_WAYBILL
-import com.example.logisticsmanagement.WAYBILL_TYPE_JSON
-import com.example.logisticsmanagement.WAYBILL_TYPE_XML
+import com.example.logisticsmanagement.*
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,6 +24,10 @@ import kotlin.system.exitProcess
 @Composable
 fun ManageActivity(navController: NavController, jobNumber: String, password: String) {
     val showDialog = remember { mutableStateOf(false) }
+
+    val context = LocalContext.current
+    val intent = Intent(Intent.ACTION_VIEW)
+    intent.data = Uri.parse(GITHUB_REPO)
 
     Column(
         modifier = Modifier
@@ -98,10 +102,12 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
             班级：计算机1906
         """.trimIndent(), fontSize = PRIMARY_TEXT_SIZE
             )
-            Text(
-                text = "github.com/jyjdal/LogisticsManagement", fontSize = SECONDARY_TEXT_SIZE,
-                textDecoration = TextDecoration.Underline
-            )
+            TextButton(onClick = { context.startActivity(intent) }) {
+                Text(
+                    text = "GitHub代码仓库", fontSize = SECONDARY_TEXT_SIZE,
+                    textDecoration = TextDecoration.Underline
+                )
+            }
         }
     }
 }
