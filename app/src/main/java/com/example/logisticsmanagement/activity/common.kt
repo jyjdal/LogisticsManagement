@@ -19,7 +19,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
-import com.example.logisticsmanagement.FormInputKeyboardType
+import com.example.logisticsmanagement.FormInputType
 
 // 用于快速显示Toast和打印日志的扩展方法
 fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
@@ -83,7 +83,7 @@ fun FormInput(
     label: String,
     modifier: Modifier = Modifier,
     required: Boolean = false,
-    inputType: FormInputKeyboardType = FormInputKeyboardType.Text,
+    inputType: FormInputType = FormInputType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
 ) {
@@ -92,14 +92,14 @@ fun FormInput(
         onValueChange = { value.value = it },
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
-        isError = if (required and (inputType == FormInputKeyboardType.Number))
+        isError = if (required and (inputType == FormInputType.Number))
             value.value.isBlank() or !(value.value.isDigitsOnly())
         else if (required)
             value.value.isBlank()
-        else if (inputType == FormInputKeyboardType.Number)
+        else if (inputType == FormInputType.Number)
             !(value.value.isDigitsOnly())
         else false,
-        visualTransformation = if (inputType == FormInputKeyboardType.Password)
+        visualTransformation = if (inputType == FormInputType.Password)
             PasswordVisualTransformation()
         else VisualTransformation.None,
         leadingIcon = leadingIcon,
@@ -114,19 +114,19 @@ fun FormInput(
             }
         },
         keyboardOptions = when (inputType) {
-            FormInputKeyboardType.Text -> KeyboardOptions(
+            FormInputType.Text -> KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Done
             )
-            FormInputKeyboardType.Number -> KeyboardOptions(
+            FormInputType.Number -> KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             )
-            FormInputKeyboardType.Password -> KeyboardOptions(
+            FormInputType.Password -> KeyboardOptions(
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done
             )
-            FormInputKeyboardType.Phone -> KeyboardOptions(
+            FormInputType.Phone -> KeyboardOptions(
                 keyboardType = KeyboardType.Phone,
                 imeAction = ImeAction.Done
             )

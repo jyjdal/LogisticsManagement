@@ -3,10 +3,8 @@ package com.example.logisticsmanagement.activity
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Password
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.twotone.Assessment
@@ -18,13 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.logisticsmanagement.FormInputKeyboardType
+import com.example.logisticsmanagement.FormInputType
 import com.example.logisticsmanagement.ROUTE_MAIN
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.ui.theme.LightBlue
@@ -61,7 +56,7 @@ fun LoginActivity(navController: NavController) {
             label = "工号",
             required = true,
             modifier = Modifier.padding(0.dp, 12.dp),
-            inputType = FormInputKeyboardType.Number,
+            inputType = FormInputType.Number,
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
             leadingIcon = { Icon(Icons.Filled.Person, contentDescription = null) }
         )
@@ -70,7 +65,7 @@ fun LoginActivity(navController: NavController) {
             label = "密码",
             required = true,
             modifier = Modifier.padding(0.dp, 12.dp),
-            inputType = FormInputKeyboardType.Password,
+            inputType = FormInputType.Password,
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
             leadingIcon = { Icon(Icons.Filled.Password, contentDescription = null) },
         )
