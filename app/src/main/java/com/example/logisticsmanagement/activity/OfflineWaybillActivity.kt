@@ -1,9 +1,6 @@
 package com.example.logisticsmanagement.activity
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
@@ -15,11 +12,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
+import com.example.logisticsmanagement.ROUTE_ADD_WAYBILL
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.data.OfflineWaybill
 
 @Composable
-fun OfflineWaybill(navController: NavController) {
+fun OfflineWaybillActivity(navController: NavController) {
     val context = LocalContext.current
     val waybillList = remember { mutableStateListOf<OfflineWaybill>() }
 
@@ -35,13 +33,17 @@ fun OfflineWaybill(navController: NavController) {
             }
         }
         Row(
-            modifier = Modifier.fillMaxHeight(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(onClick = { navController.popBackStack() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth(0.5F),
+                onClick = { navController.popBackStack() }) {
                 Text(text = "返回")
             }
-            Button(onClick = { navController.popBackStack() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { navController.navigate(ROUTE_ADD_WAYBILL) }) {
                 Text(text = "添加")
             }
         }
