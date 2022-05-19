@@ -11,6 +11,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.logisticsmanagement.ROUTE_OFFLINE_WAYBILL
 import com.example.logisticsmanagement.ROUTE_ONLINE_WAYBILL
 import com.example.logisticsmanagement.WAYBILL_TYPE_JSON
 import com.example.logisticsmanagement.WAYBILL_TYPE_XML
@@ -63,7 +64,7 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
         ) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { /*TODO*/ }) {
+                onClick = { navController.navigate(ROUTE_OFFLINE_WAYBILL) }) {
                 Text(text = "查看本地运单")
             }
             Button(

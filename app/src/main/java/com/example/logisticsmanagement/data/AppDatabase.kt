@@ -6,15 +6,20 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 const val DATABASE_NAME = "management.db"
-const val DATABASE_VERSION = 1
+const val DATABASE_VERSION = 2
 
 /**
  * 数据库类，包含对数据库的操作
  * 使用[AppDatabase.getInstance]方法获取数据库实例
  */
-@Database(entities = [Employee::class], version = DATABASE_VERSION, exportSchema = false)
+@Database(
+    entities = [Employee::class, OfflineWaybill::class],
+    version = DATABASE_VERSION,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun employeeDAO(): EmployeeDAO
+    abstract fun offlineWaybillDAO(): OfflineWaybillDAO
 
     companion object {
         private var instance: AppDatabase? = null

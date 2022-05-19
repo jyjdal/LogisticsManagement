@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
  * 员工实体类，包含姓名、工号、密码等信息
  * 其中[jobNumber]表示工号，相当于登录的账号
  */
-@Entity(indices = [Index(value = ["jobNumber"], unique = true)])
+@Entity(tableName = "employee", indices = [Index(value = ["jobNumber"], unique = true)])
 data class Employee(
     @PrimaryKey val id: Int,
 
