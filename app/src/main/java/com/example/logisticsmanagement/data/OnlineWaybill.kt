@@ -1,7 +1,6 @@
 package com.example.logisticsmanagement.data
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
