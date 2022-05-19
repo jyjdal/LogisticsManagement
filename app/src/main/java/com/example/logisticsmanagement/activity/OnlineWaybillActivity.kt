@@ -82,15 +82,15 @@ fun OnlineWayBillActivity(navController: NavController, factoryType: String) {
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(text = "${waybill.src}-${waybill.dest}", fontSize = 20.sp)
                         Text(text = "${waybill.name}:${waybill.count}", fontSize = 20.sp)
-                        Text(text = "${waybill.waybillNo}", fontSize = 20.sp)
+                        Text(text = waybill.waybillNo, fontSize = 20.sp)
                     }
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         Text(
                             text = "收货人:${waybill.consignee}(${waybill.consigneePhoneNumber})",
