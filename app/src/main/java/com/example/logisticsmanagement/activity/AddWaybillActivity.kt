@@ -2,82 +2,96 @@ package com.example.logisticsmanagement.activity
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
+import com.example.logisticsmanagement.FormInputKeyboardType
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.data.OfflineWaybill
 
 @Composable
 fun AddWaybillActivity(navController: NavController) {
-    val waybill = remember { mutableStateOf(OfflineWaybill()) }
-    initWaybill(waybill)
-    val count = remember { mutableStateOf("") }
+    // 本地运单必选项
+    val name = remember { mutableStateOf("") }
+    val dest = remember { mutableStateOf("") }
+    val count = remember { mutableStateOf("") }  // number
+
+    // 本地运单可选项
+    val consignor = remember { mutableStateOf("") }
+    val consignorPhone = remember { mutableStateOf("") }
+    val consignee = remember { mutableStateOf("") }
+    val consigneePhone = remember { mutableStateOf("") }
+    val prepayment = remember { mutableStateOf("") }  // number
+    val toPay = remember { mutableStateOf("") }
 
     val context = LocalContext.current
     val dao = AppDatabase.getInstance(context).offlineWaybillDAO()
+
+    fun clearWaybillFields() {
+        name.value = ""
+        dest.value = ""
+        count.value = ""
+        consignor.value = ""
+        consignorPhone.value = ""
+        consignee.value = ""
+        consigneePhone.value = ""
+        prepayment.value = ""
+        toPay.value = ""
+    }
+
+    fun String.toIntEnhanced(): Int {
+        return if (this.isBlank() or !(this.isDigitsOnly())) {
+            0
+        } else {
+            this.toInt()
+        }
+    }
+
+    fun constructWaybill(): OfflineWaybill {
+        val waybill = OfflineWaybill()
+        waybill.name = name.value
+        waybill.dest = dest.value
+        waybill.src = "沈阳"
+        waybill.count = count.value.toIntEnhanced()
+        waybill.consignor = consignor.value
+        waybill.consignorPhoneNumber = consignorPhone.value
+        waybill.consignee = consignee.value
+        waybill.consigneePhoneNumber = consigneePhone.value
+        waybill.freightPaidByConsignor = prepayment.value.toIntEnhanced()
+        waybill.freightPaidByTheReceivingParty = toPay.value.toIntEnhanced()
+
+        return waybill
+    }
 
     Column {
         Column(
             modifier = Modifier
                 .fillMaxHeight(0.9F)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Row {
-                Text(text = "终点：")
-                TextField(value = waybill.value.dest, onValueChange = { waybill.value.dest = it })
+                FormInput(value = dest, label = "终点", required = true)
                 Text(text = "起点：沈阳")
             }
-            Row {
-                Text(text = "货物名称：")
-                TextField(
-                    value = waybill.value.name,
-                    onValueChange = { waybill.value.name = it })
-            }
-            Row {
-                OutlinedTextField(
-                    value = count.value,
-                    onValueChange = {
-                        waybill.value.count =
-                            if (it.isDigitsOnly() and it.isNotBlank()) it.toInt() else 0
-                        count.value = it
-                    },
-                    isError = count.value.isBlank() or !(count.value.isDigitsOnly()),
-                    label = { Text(text = "数量") }
-                )
-            }
-            Row {
-                Text(text = "发货人：")
-                TextField(
-                    value = waybill.value.consignor,
-                    onValueChange = { waybill.value.consignor = it })
-            }
-            Row {
-                Text(text = "发货人电话：")
-                TextField(
-                    value = waybill.value.consignorPhoneNumber,
-                    onValueChange = { waybill.value.consignorPhoneNumber = it })
-            }
-            Row {
-                Text(text = "收货人：")
-                TextField(
-                    value = waybill.value.consignee,
-                    onValueChange = { waybill.value.consignee = it })
-            }
-            Row {
-                Text(text = "收货人电话：")
-                TextField(
-                    value = waybill.value.consigneePhoneNumber,
-                    onValueChange = { waybill.value.consigneePhoneNumber = it })
-            }
+            FormInput(value = name, label = "货物名称", required = true)
+            FormInput(
+                value = count,
+                label = "数量",
+                required = true,
+                inputType = FormInputKeyboardType.Number
+            )
+            FormInput(value = consignor, label = "发货人")
+            FormInput(value = consignorPhone, label = "发货人电话")
+            FormInput(value = consignee, label = "收货人")
+            FormInput(value = consigneePhone, label = "收货人电话")
+            FormInput(value = prepayment, label = "预付款", inputType = FormInputKeyboardType.Number)
+            FormInput(value = toPay, label = "到付款", inputType = FormInputKeyboardType.Number)
         }
 
         Row(
@@ -91,14 +105,16 @@ fun AddWaybillActivity(navController: NavController) {
             }
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { dao.insert(waybill.value) }) {
+                onClick = {
+                    // construct waybill
+                    val waybill = constructWaybill()
+                    // add waybill to database
+                    dao.insert(waybill)
+                    // clear inputs
+                    clearWaybillFields()
+                }) {
                 Text(text = "保存")
             }
         }
     }
-}
-
-private fun initWaybill(waybill: MutableState<OfflineWaybill>) {
-    waybill.value = OfflineWaybill()
-    waybill.value.src = "沈阳"
 }

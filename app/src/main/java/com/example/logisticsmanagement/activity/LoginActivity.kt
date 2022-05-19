@@ -67,7 +67,7 @@ fun LoginActivity(navController: NavController) {
         FormInput(
             value = password,
             label = "密码",
-            isError = false,
+            required = true,
             inputType = FormInputKeyboardType.Password,
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
             leadingIcon = { Icon(Icons.Filled.Password, contentDescription = null) },
