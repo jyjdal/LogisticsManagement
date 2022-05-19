@@ -20,7 +20,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
-import com.example.logisticsmanagement.FormInputType
 
 // 用于快速显示Toast和打印日志的扩展方法
 fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
@@ -136,4 +135,11 @@ fun FormInput(
         keyboardActions = keyboardActions,
         textStyle = TextStyle(fontSize = FIELD_FONT_SIZE)
     )
+}
+
+enum class FormInputType {
+    Text,
+    Number,
+    Password,
+    Phone
 }

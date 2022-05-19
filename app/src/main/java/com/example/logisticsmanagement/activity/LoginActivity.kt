@@ -19,7 +19,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.logisticsmanagement.FormInputType
 import com.example.logisticsmanagement.ROUTE_MAIN
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.ui.theme.LightBlue

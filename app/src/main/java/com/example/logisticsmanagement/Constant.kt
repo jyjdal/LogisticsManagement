@@ -16,10 +16,3 @@ const val WAYBILL_URL_XML = "simulated-Waybills-db.xml"
 
 // GitHub在线仓库地址
 const val GITHUB_REPO = "https://github.com/jyjdal/LogisticsManagement"
-
-enum class FormInputType {
-    Text,
-    Number,
-    Password,
-    Phone
-}
