@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -83,6 +84,7 @@ fun FormInput(
     label: String,
     modifier: Modifier = Modifier,
     required: Boolean = false,
+    readOnly: Boolean = false,
     inputType: FormInputType = FormInputType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -91,6 +93,7 @@ fun FormInput(
         value = value.value,
         onValueChange = { value.value = it },
         singleLine = true,
+        readOnly = readOnly,
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
         isError = if (required and (inputType == FormInputType.Number))
@@ -132,6 +135,7 @@ fun FormInput(
                 imeAction = ImeAction.Done
             )
         },
-        keyboardActions = keyboardActions
+        keyboardActions = keyboardActions,
+        textStyle = TextStyle(fontSize = FIELD_FONT_SIZE)
     )
 }

@@ -6,8 +6,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import com.example.logisticsmanagement.FormInputType
@@ -68,16 +71,29 @@ fun AddWaybillActivity(navController: NavController) {
         return waybill
     }
 
-    Column {
+    Column(
+        Modifier
+            .padding(20.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxHeight(0.9F)
+                .fillMaxHeight(0.6F)
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Row {
-                FormInput(value = dest, label = "终点", required = true)
-                Text(text = "起点：沈阳")
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                FormInput(
+                    value = dest,
+                    label = "终点",
+                    required = true,
+                    modifier = Modifier.fillMaxWidth(0.65F)
+                )
+                Text(text = "起点：沈阳", fontSize = 24.sp)
             }
             FormInput(value = name, label = "货物名称", required = true)
             FormInput(
@@ -86,20 +102,38 @@ fun AddWaybillActivity(navController: NavController) {
                 required = true,
                 inputType = FormInputType.Number
             )
-            FormInput(value = consignor, label = "发货人")
-            FormInput(
-                value = consignorPhone,
-                label = "发货人电话",
-                inputType = FormInputType.Phone
-            )
-            FormInput(value = consignee, label = "收货人")
-            FormInput(
-                value = consigneePhone,
-                label = "收货人电话",
-                inputType = FormInputType.Phone
-            )
-            FormInput(value = prepayment, label = "预付款", inputType = FormInputType.Number)
-            FormInput(value = toPay, label = "到付款", inputType = FormInputType.Number)
+            Row {
+                FormInput(value = consignor, label = "发货人", modifier = Modifier.fillMaxWidth(0.4F))
+                FormInput(
+                    value = consignorPhone,
+                    label = "发货人电话",
+                    inputType = FormInputType.Phone,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            Row {
+                FormInput(value = consignee, label = "收货人", modifier = Modifier.fillMaxWidth(0.4F))
+                FormInput(
+                    value = consigneePhone,
+                    label = "收货人电话",
+                    inputType = FormInputType.Phone,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            Row {
+                FormInput(
+                    value = prepayment,
+                    label = "预付款",
+                    inputType = FormInputType.Number,
+                    modifier = Modifier.fillMaxWidth(0.5F)
+                )
+                FormInput(
+                    value = toPay,
+                    label = "到付款",
+                    inputType = FormInputType.Number,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         }
 
         Row(
