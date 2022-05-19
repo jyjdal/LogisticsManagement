@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import com.example.logisticsmanagement.FormInputKeyboardType
 
 // 用于快速显示Toast和打印日志的扩展方法
@@ -81,7 +82,7 @@ fun FormInput(
     value: MutableState<String>,
     label: String,
     modifier: Modifier = Modifier,
-    isError: Boolean = false,
+    required: Boolean = false,
     inputType: FormInputKeyboardType = FormInputKeyboardType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -91,7 +92,11 @@ fun FormInput(
         onValueChange = { value.value = it },
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
-        isError = isError,
+        isError = if (inputType == FormInputKeyboardType.Number)
+            !(value.value.isDigitsOnly())
+        else if (required)
+            value.value.isBlank()
+        else false,
         visualTransformation = if (inputType == FormInputKeyboardType.Password)
             PasswordVisualTransformation()
         else VisualTransformation.None,
