@@ -87,9 +87,17 @@ fun AddWaybillActivity(navController: NavController) {
                 inputType = FormInputKeyboardType.Number
             )
             FormInput(value = consignor, label = "发货人")
-            FormInput(value = consignorPhone, label = "发货人电话")
+            FormInput(
+                value = consignorPhone,
+                label = "发货人电话",
+                inputType = FormInputKeyboardType.Phone
+            )
             FormInput(value = consignee, label = "收货人")
-            FormInput(value = consigneePhone, label = "收货人电话")
+            FormInput(
+                value = consigneePhone,
+                label = "收货人电话",
+                inputType = FormInputKeyboardType.Phone
+            )
             FormInput(value = prepayment, label = "预付款", inputType = FormInputKeyboardType.Number)
             FormInput(value = toPay, label = "到付款", inputType = FormInputKeyboardType.Number)
         }

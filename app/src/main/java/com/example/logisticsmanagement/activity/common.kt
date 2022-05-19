@@ -126,6 +126,10 @@ fun FormInput(
                 keyboardType = KeyboardType.Password,
                 imeAction = ImeAction.Done
             )
+            FormInputKeyboardType.Phone -> KeyboardOptions(
+                keyboardType = KeyboardType.Phone,
+                imeAction = ImeAction.Done
+            )
         },
         keyboardActions = keyboardActions
     )

@@ -20,5 +20,6 @@ const val GITHUB_REPO = "https://github.com/jyjdal/LogisticsManagement"
 enum class FormInputKeyboardType {
     Text,
     Number,
-    Password
+    Password,
+    Phone
 }
