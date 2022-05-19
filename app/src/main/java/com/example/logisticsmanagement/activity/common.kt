@@ -4,14 +4,21 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.logisticsmanagement.FormInputKeyboardType
 
 // 用于快速显示Toast和打印日志的扩展方法
 fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
@@ -67,4 +74,52 @@ fun CustomContentDialog(
             }
         )
     }
+}
+
+@Composable
+fun FormInput(
+    value: MutableState<String>,
+    label: String,
+    modifier: Modifier = Modifier,
+    isError: Boolean = false,
+    inputType: FormInputKeyboardType = FormInputKeyboardType.Text,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    leadingIcon: @Composable (() -> Unit)? = null,
+) {
+    OutlinedTextField(
+        value = value.value,
+        onValueChange = { value.value = it },
+        modifier = modifier,
+        label = { Text(text = label, fontSize = 20.sp) },
+        isError = isError,
+        visualTransformation = if (inputType == FormInputKeyboardType.Password)
+            PasswordVisualTransformation()
+        else VisualTransformation.None,
+        leadingIcon = leadingIcon,
+        trailingIcon = {
+            if (value.value.isNotEmpty()) {
+                IconButton(onClick = { value.value = "" }) {
+                    Icon(
+                        Icons.Filled.Clear,
+                        contentDescription = null
+                    )
+                }
+            }
+        },
+        keyboardOptions = when (inputType) {
+            FormInputKeyboardType.Text -> KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Done
+            )
+            FormInputKeyboardType.Number -> KeyboardOptions(
+                keyboardType = KeyboardType.Number,
+                imeAction = ImeAction.Done
+            )
+            FormInputKeyboardType.Password -> KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done
+            )
+        },
+        keyboardActions = keyboardActions
+    )
 }

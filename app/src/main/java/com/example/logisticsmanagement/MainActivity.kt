@@ -8,10 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.logisticsmanagement.activity.LoginActivity
-import com.example.logisticsmanagement.activity.ManageActivity
-import com.example.logisticsmanagement.activity.OfflineWaybill
-import com.example.logisticsmanagement.activity.OnlineWayBillActivity
+import com.example.logisticsmanagement.activity.*
 import com.example.logisticsmanagement.ui.theme.ApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +42,10 @@ fun MainContent() {
             )
         }
         composable(ROUTE_OFFLINE_WAYBILL) {
-            OfflineWaybill(navController = navController)
+            OfflineWaybillActivity(navController = navController)
+        }
+        composable(ROUTE_ADD_WAYBILL) {
+            AddWaybillActivity(navController = navController)
         }
     }
 }

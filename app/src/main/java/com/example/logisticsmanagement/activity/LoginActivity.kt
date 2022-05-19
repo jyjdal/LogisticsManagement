@@ -24,6 +24,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.logisticsmanagement.FormInputKeyboardType
 import com.example.logisticsmanagement.ROUTE_MAIN
 import com.example.logisticsmanagement.data.AppDatabase
 import com.example.logisticsmanagement.ui.theme.LightBlue
@@ -55,48 +56,21 @@ fun LoginActivity(navController: NavController) {
                 .padding(0.dp, 8.dp), tint = LightBlue
         )
         Text(text = "物流管理系统 By 孙强", fontSize = 24.sp, modifier = Modifier.padding(8.dp))
-        OutlinedTextField(
-            value = jobNumber.value, onValueChange = { jobNumber.value = it },
-            label = { Text(text = "工号：", fontSize = 20.sp) },
+        FormInput(
+            value = jobNumber,
+            label = "工号",
             modifier = Modifier.padding(0.dp, 12.dp),
-            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = null) },
-            trailingIcon = {
-                if (jobNumber.value.isNotEmpty()) {
-                    IconButton(onClick = { jobNumber.value = "" }) {
-                        Icon(
-                            Icons.Filled.Clear,
-                            contentDescription = null
-                        )
-                    }
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) })
+            inputType = FormInputKeyboardType.Number,
+            keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
+            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = null) }
         )
-        OutlinedTextField(
-            value = password.value, onValueChange = { password.value = it },
-            label = { Text(text = "密码：", fontSize = 20.sp) },
-            modifier = Modifier.padding(0.dp, 12.dp),
-            visualTransformation = PasswordVisualTransformation(),
+        FormInput(
+            value = password,
+            label = "密码",
+            isError = false,
+            inputType = FormInputKeyboardType.Password,
+            keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
             leadingIcon = { Icon(Icons.Filled.Password, contentDescription = null) },
-            trailingIcon = {
-                if (password.value.isNotEmpty()) {
-                    IconButton(onClick = { password.value = "" }) {
-                        Icon(
-                            Icons.Filled.Clear,
-                            contentDescription = null
-                        )
-                    }
-                }
-            },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Password,
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) })
         )
         Spacer(modifier = Modifier.height(20.dp))
         Row {
