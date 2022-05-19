@@ -59,6 +59,7 @@ fun LoginActivity(navController: NavController) {
         FormInput(
             value = jobNumber,
             label = "工号",
+            required = true,
             modifier = Modifier.padding(0.dp, 12.dp),
             inputType = FormInputKeyboardType.Number,
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
@@ -68,6 +69,7 @@ fun LoginActivity(navController: NavController) {
             value = password,
             label = "密码",
             required = true,
+            modifier = Modifier.padding(0.dp, 12.dp),
             inputType = FormInputKeyboardType.Password,
             keyboardActions = KeyboardActions(onDone = { focusManager.moveFocus(FocusDirection.Down) }),
             leadingIcon = { Icon(Icons.Filled.Password, contentDescription = null) },

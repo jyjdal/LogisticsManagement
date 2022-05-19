@@ -92,10 +92,12 @@ fun FormInput(
         onValueChange = { value.value = it },
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
-        isError = if (inputType == FormInputKeyboardType.Number)
-            !(value.value.isDigitsOnly())
+        isError = if (required and (inputType == FormInputKeyboardType.Number))
+            value.value.isBlank() or !(value.value.isDigitsOnly())
         else if (required)
             value.value.isBlank()
+        else if (inputType == FormInputKeyboardType.Number)
+            !(value.value.isDigitsOnly())
         else false,
         visualTransformation = if (inputType == FormInputKeyboardType.Password)
             PasswordVisualTransformation()
