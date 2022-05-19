@@ -90,6 +90,7 @@ fun FormInput(
     OutlinedTextField(
         value = value.value,
         onValueChange = { value.value = it },
+        singleLine = true,
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
         isError = if (required and (inputType == FormInputType.Number))
