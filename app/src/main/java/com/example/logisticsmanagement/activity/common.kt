@@ -84,7 +84,6 @@ fun FormInput(
     label: String,
     modifier: Modifier = Modifier,
     required: Boolean = false,
-    readOnly: Boolean = false,
     inputType: FormInputType = FormInputType.Text,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
@@ -93,7 +92,6 @@ fun FormInput(
         value = value.value,
         onValueChange = { value.value = it },
         singleLine = true,
-        readOnly = readOnly,
         modifier = modifier,
         label = { Text(text = label, fontSize = 20.sp) },
         isError = if (required and (inputType == FormInputType.Number))
