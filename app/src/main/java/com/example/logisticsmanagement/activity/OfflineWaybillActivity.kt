@@ -29,6 +29,7 @@ fun OfflineWaybillActivity(navController: NavController) {
     LaunchedEffect(key1 = 1) {
         val db = AppDatabase.getInstance(context)
         waybillList.addAll(db.offlineWaybillDAO().getAll())
+        "成功获取本地运单：${waybillList.size}".log()
     }
 
     Column(

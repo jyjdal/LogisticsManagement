@@ -26,8 +26,13 @@ fun String.showToast(context: Context, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(context, this, duration).show()
 }
 
-fun String.log(level: Int = Log.INFO, tag: String = "Application log") {
-    Log.println(level, tag, this)
+// 用于快速调用日志
+fun String.log(level: Int = Log.INFO, tag: String = "Application log", tagSuffix: String = "") {
+    if (tagSuffix.isNotBlank()) {
+        Log.println(level, "${tag}-${tagSuffix}", this)
+    } else {
+        Log.println(level, tag, this)
+    }
 }
 
 // 对一些常用的对话框进行封装

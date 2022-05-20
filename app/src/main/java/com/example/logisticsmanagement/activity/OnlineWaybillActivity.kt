@@ -32,6 +32,8 @@ import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import kotlin.system.exitProcess
 
+private const val logTagSuffix = "Online Waybill"
+
 @Composable
 fun OnlineWayBillActivity(navController: NavController, factoryType: String) {
     val factory =
@@ -54,13 +56,13 @@ fun OnlineWayBillActivity(navController: NavController, factoryType: String) {
                 call: Call<OnlineWaybillPackaged>, response: Response<OnlineWaybillPackaged>
             ) {
                 val list = response.body()!!.waybillList
-                Log.i("Web waybill", "${list.size}")
                 waybillList.addAll(list)
-                "${waybillList.size}".log()
+                "成功获取在线运单${factoryType}：%{list.size}".log(tagSuffix = logTagSuffix)
             }
 
             override fun onFailure(call: Call<OnlineWaybillPackaged>, t: Throwable) {
-                t.printStackTrace()
+                "无法获取在线运单！类型：${factoryType}".log(level = Log.ERROR, tagSuffix = logTagSuffix)
+                t.stackTraceToString().log(level = Log.ERROR, tagSuffix = logTagSuffix)
                 exitProcess(-1)
             }
 

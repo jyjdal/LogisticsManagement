@@ -89,7 +89,10 @@ fun ManageActivity(navController: NavController, jobNumber: String, password: St
                 .padding(0.dp, 20.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(onClick = { navController.popBackStack() }) { Text(text = "退出登录") }
+            Button(onClick = {
+                "退出登录".log()
+                navController.popBackStack()
+            }) { Text(text = "退出登录") }
             Button(onClick = { exitProcess(0) }) { Text(text = "退出") }
         }
     }

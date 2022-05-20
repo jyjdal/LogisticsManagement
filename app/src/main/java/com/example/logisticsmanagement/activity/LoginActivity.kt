@@ -101,7 +101,8 @@ fun LoginActivity(navController: NavController) {
                     return@Button
                 }
 
-                // 正确登录，首先清空输入，然后导航到
+                // 正确登录，首先清空输入，然后导航到主页面
+                "${employee.name}: ${employee.jobNumber}成功登录".log(tagSuffix = "Login")
                 navController.navigate("${ROUTE_MAIN}/${jobNumber.value}/${password.value}")
                 jobNumber.value = ""
                 password.value = ""

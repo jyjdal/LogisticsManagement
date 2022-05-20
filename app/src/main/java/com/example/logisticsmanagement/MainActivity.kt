@@ -48,4 +48,5 @@ fun MainContent() {
             AddWaybillActivity(navController = navController)
         }
     }
+    "${navController.graph.nodes}".log()
 }

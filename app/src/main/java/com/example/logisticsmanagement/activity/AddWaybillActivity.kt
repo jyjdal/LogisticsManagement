@@ -151,6 +151,7 @@ fun AddWaybillActivity(navController: NavController) {
                     val waybill = constructWaybill()
                     // add waybill to database
                     dao.insert(waybill)
+                    "成功创建离线运单".log()
                     // clear inputs
                     clearWaybillFields()
                 }) {
